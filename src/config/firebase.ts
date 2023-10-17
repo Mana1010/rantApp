@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 import { collection, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 const firebaseConfig = {
@@ -15,10 +19,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const auth = getAuth();
+export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
-export const githubProvider = new GithubAuthProvider();
+export const facebookAuthProvider = new FacebookAuthProvider();
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-export const authRef = collection(db, "notes");
-export const imageRef = collection(db, "images");

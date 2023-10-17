@@ -1,20 +1,19 @@
 import React from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { Style } from "../pages/Home";
-import { motion } from "framer-motion";
+import { NavLink, Outlet, useLocation, Link } from "react-router-dom";
 import title from "../pages/title.png";
 function Layout() {
-  const location = useLocation();
   return (
-    <Style>
+    <div className="w-screen h-screen bg-slate-600 overflow-hidden">
       <header className="w-full p-2">
-        <img
-          src={title}
-          alt="title"
-          className="md:w-[230px] sm:w-[200px] w-[150px]"
-        />
+        <Link to="/">
+          <img
+            src={title}
+            alt="title"
+            className="md:w-[230px] sm:w-[200px] w-[150px]"
+          />
+        </Link>
       </header>
-      <motion.div className="flex justify-center items-center w-screen h-[80%] flex-col px-4">
+      <div className="flex justify-center items-center w-screen sm:h-[80%] h-[530px] flex-col px-4 overflow-hidden">
         <div className="w-full md:w-1/2 h-[80%] md:h-[90%] bg-[#2E3138] rounded-sm py-3 px-4">
           <header className="flex space-y-6 w-full flex-col">
             <h1 className="font-poppins text-white text-xl">
@@ -39,10 +38,11 @@ function Layout() {
               </NavLink>
             </ul>
           </header>
+
           <Outlet />
         </div>
-      </motion.div>
-    </Style>
+      </div>
+    </div>
   );
 }
 
