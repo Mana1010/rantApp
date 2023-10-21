@@ -8,7 +8,6 @@ import { SetStateAction } from "react";
 import profile from "./images/default.png";
 import { useNewsFeedStore } from "../store/newsfeedStore";
 function CustomizeProfile() {
-  const { addDocs, onSnap, dataList, offSnap } = useNewsFeedStore();
   const [imgOfficial, setImgOfficial] = useState<string>("");
   const [info, setInfo] = useState<any>(null);
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ function CustomizeProfile() {
   });
   const { register, handleSubmit, reset } = form;
   function submitProfile(data: { username: string }) {
-    addDocs(data, imgOfficial);
     setInfo({
       ...info,
       username: data.username,
@@ -47,12 +45,6 @@ function CustomizeProfile() {
   useEffect(() => {
     localStorage.setItem("profile", JSON.stringify(info));
   }, [info]);
-  useEffect(() => {
-    onSnap();
-    return () => {
-      offSnap();
-    };
-  }, []);
   const parsing: string = JSON.parse(localStorage.getItem("profile") as string);
   return (
     <div className="w-screen h-screen bg-gradient-to-tr to-red-900 from-fuchsia-600 overflow-hidden">

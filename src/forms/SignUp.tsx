@@ -28,7 +28,7 @@ function SignUp() {
     try {
       setLoading(true);
       await createUserWithEmailAndPassword(auth, data.email, data.password);
-      navigate("/");
+      navigate("login");
       reset();
     } catch (err) {
       setInUse("Email already in use");

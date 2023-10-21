@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   auth,
   googleAuthProvider,
   facebookAuthProvider,
 } from "../config/firebase";
-import { DevTool } from "@hookform/devtools";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -28,7 +27,7 @@ function Login() {
     },
   });
   const [errors, setError] = useState<string>("");
-  const { handleSubmit, register, control, reset, formState } = form;
+  const { handleSubmit, register, reset } = form;
   async function formSub(data: Info) {
     try {
       setLoading(true);
@@ -147,7 +146,6 @@ function Login() {
           </div>
         </div>
       </form>
-      <DevTool control={control} />
     </div>
   );
 }

@@ -4,11 +4,9 @@ import { auth, db } from "../config/firebase";
 import { Unsubscribe, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 import { doc, collection } from "firebase/firestore";
 
-let unsub: Unsubscribe | null = null;
+let unsubFeed: Unsubscribe | null = null;
 const store = (set: any) => ({
-  dataList: [],
   userPostList: [],
-  updatedDataList: [],
   isLoggedIn: false,
   stateChanged: () => {
     onAuthStateChanged(auth, (redireting) => {
@@ -21,41 +19,40 @@ const store = (set: any) => ({
       }
     });
   },
-  addDocs: async (info: { username: string }, imgOfficial: string) => {
-    const profileInfo = {
-      username: info.username,
-      img: imgOfficial,
+  addUserFeed: async (getPost: { post: string }, dates: number) => {
+    const getData = JSON.parse(localStorage.getItem("profile") || "{}");
+    const dataParsed = {
+      ...getData,
+      createdAt: dates,
+      ...getPost,
     };
-    const profileRef = collection(db, "profile");
+    const userListRef = collection(db, "newsfeedPosts");
     try {
-      await addDoc(profileRef, profileInfo);
+      set({ userPostList: [] });
+      await addDoc(userListRef, dataParsed);
     } catch (err) {
       console.error(err);
     }
   },
-  onSnap: async () => {
-    const profileRef = collection(db, "profile");
-    unsub = onSnapshot(profileRef, (snapshot) => {
-      snapshot.docs.map((mapping) => {
-        const data = {
-          ...mapping.data(),
-          ids: mapping.id,
+  onSnapFeed: async () => {
+    const userListRef = collection(db, "newsfeedPosts");
+    unsubFeed = onSnapshot(userListRef, (snapshot) => {
+      snapshot.docs.map((maps) => {
+        const dataFeed = {
+          ...maps.data(),
+          id: maps.id,
         };
-        set((state: any) => ({ dataList: [...state.dataList, data] }));
+        set((state: any) => ({
+          userPostList: [...state.userPostList, dataFeed],
+        }));
       });
     });
   },
-  offSnap: async () => {
-    if (unsub) {
-      unsub();
-      unsub = null;
+  offSnapFeed: () => {
+    if (unsubFeed) {
+      unsubFeed(), (unsubFeed = null);
     }
   },
-  addUserFeed: async () => {
-    const getData: string = JSON.parse(
-      localStorage.getItem("profile") as string
-    );
-    const userListRef = collection(db, "newsfeedPosts");
-  },
 });
+
 export const useNewsFeedStore = create(store);
