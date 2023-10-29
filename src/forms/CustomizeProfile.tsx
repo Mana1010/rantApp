@@ -4,9 +4,7 @@ import title from "../pages/title.png";
 import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../config/firebase";
-import { SetStateAction } from "react";
 import profile from "./images/default.png";
-import { useNewsFeedStore } from "../store/newsfeedStore";
 function CustomizeProfile() {
   const [imgOfficial, setImgOfficial] = useState<string>("");
   const [info, setInfo] = useState<any>(null);

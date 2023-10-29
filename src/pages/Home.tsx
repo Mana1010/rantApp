@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Link, Outlet } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useNewsFeedStore } from "../store/newsfeedStore";
-import scatter from "./scatter.png";
 import title from "./title.png";
 import { motion } from "framer-motion";
 function Home() {

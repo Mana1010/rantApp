@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import title from "./title.png";
 import { useNewsFeedStore } from "../store/newsfeedStore";
-import { DevTool } from "@hookform/devtools";
 type States = {
   setShowEdit: Dispatch<SetStateAction<boolean>>;
 };

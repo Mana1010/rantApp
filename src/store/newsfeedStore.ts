@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { Unsubscribe, addDoc, getDocs, onSnapshot } from "firebase/firestore";
-import { doc, collection } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 
 let unsubFeed: Unsubscribe | null = null;
 const store = (set: any) => ({

@@ -4,7 +4,6 @@ import title from "./title.png";
 import { Link } from "react-router-dom";
 import defaultPic from "../forms/images/default.png";
 import { FaArrowDown } from "react-icons/fa";
-import { useForm } from "react-hook-form";
 import MakeAPost from "./MakeAPost";
 type UserInfo = {
   img: string;

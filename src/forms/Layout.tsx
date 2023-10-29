@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet, useLocation, Link } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 import title from "../pages/title.png";
 function Layout() {
   return (
